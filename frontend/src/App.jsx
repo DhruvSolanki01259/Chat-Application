@@ -4,6 +4,7 @@ import SignUp from "./pages/signup/SignUp";
 import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import NotFound from "./pages/404/NotFound";
+import Inbox from "./pages/inbox/Inbox";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route
           path='/'
           element={<Home />}
+          replace
         />
         <Route
           path='/signup'
@@ -24,6 +26,10 @@ const App = () => {
         <Route
           path='/profile'
           element={<Profile />}
+        />
+        <Route
+          path='/inbox'
+          element={<Inbox />}
         />
         <Route
           path='*'
