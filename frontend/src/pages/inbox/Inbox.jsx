@@ -1,12 +1,32 @@
 import MessageContainer from "../../components/messages/MessageContainer";
 import Sidebar from "../../components/sidebar/Sidebar";
+import useMobileScreenSize from "../../hooks/mobileScreenSize";
+import MobileSearchBar from "../../components/mobile/MobileSearchBar";
+import MobileFooter from "../../components/mobile/MobileFooter";
+import MobileSidebarAndMessageContainer from "../../components/mobile/MobileSidebarAndMessageContainer";
 
 const Inbox = () => {
+  const { width } = useMobileScreenSize();
+  const isMobile = width < 640;
+  // console.log("Mobile Screen", isMobile);
+
   return (
-    <div className='flex sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
-      <Sidebar />
-      <MessageContainer />
-    </div>
+    <>
+      {isMobile ? (
+        <div className='flex flex-col sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+          <MobileSearchBar />
+
+          <MobileSidebarAndMessageContainer />
+
+          <MobileFooter />
+        </div>
+      ) : (
+        <div className='flex sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+          <Sidebar />
+          <MessageContainer />
+        </div>
+      )}
+    </>
   );
 };
 

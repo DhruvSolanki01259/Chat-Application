@@ -1,11 +1,10 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
 
-import bcrypt from "bcryptjs";
-
 export const sendMessage = async (req, res) => {
   try {
     const { message } = req.body;
+    // console.log(`message`, message);
     const { id: recieverId } = req.params;
     const senderId = req.user._id;
 
@@ -19,11 +18,10 @@ export const sendMessage = async (req, res) => {
       });
     }
 
-    const hashedMessage = await bcrypt.hash(message, 10);
     const newMessage = await Message.create({
       senderId,
       recieverId,
-      message: hashedMessage,
+      message,
     });
     if (newMessage) conversation.messages.push(newMessage._id);
 
@@ -49,9 +47,14 @@ export const getMessages = async (req, res) => {
       participants: { $all: [senderId, recieverId] },
     }).populate("messages");
 
+    // console.log(conversation.messages);
+    if (!conversation) {
+      return res.status(200).json([]);
+    }
+
     res.status(200).json(conversation.messages);
   } catch (error) {
-    console.log("Error in Sending Message", error.message);
+    console.log("Error in Getting Message", error.message);
     res.status(500).json({
       success: false,
       error: true,

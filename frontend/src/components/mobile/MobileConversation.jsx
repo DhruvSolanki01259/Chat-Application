@@ -1,6 +1,6 @@
 import { useConversationStore } from "../../store/conversationStore";
 
-const Conversation = ({ conversation, emoji, lastIdx }) => {
+const MobileConversation = ({ conversation }) => {
   const { setReceiverId, selectedConversation, setSelectedConversation } =
     useConversationStore();
 
@@ -26,21 +26,11 @@ const Conversation = ({ conversation, emoji, lastIdx }) => {
             />
           </div>
         </div>
-
-        {/* User Info */}
-        <div className='flex flex-col flex-1'>
-          <div className='flex justify-between items-center'>
-            <p className='font-semibold text-white text-sm'>
-              {conversation.username}
-            </p>
-            <span className='text-xl'>{emoji}</span>
-          </div>
-        </div>
       </div>
 
-      {!lastIdx && <div className='divider my-1 py-0 h-px bg-slate-700' />}
+      {/* {!lastIdx && <div className='divider my-1 py-0 h-px bg-slate-700' />} */}
     </>
   );
 };
 
-export default Conversation;
+export default MobileConversation;

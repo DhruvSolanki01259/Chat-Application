@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useAuthStore } from "../../store/authStore";
 import { useConversationStore } from "../../store/conversationStore";
-import MessageInput from "./MessageInput";
 import Messages from "./Messages";
 
 import { TiMessages } from "react-icons/ti";
+import MessageInput from "./MessageInput";
 
-const MessageContainer = () => {
+const MobileMessageContainer = () => {
   const { selectedConversation, setSelectedConversation } =
     useConversationStore();
 
@@ -15,7 +15,7 @@ const MessageContainer = () => {
   }, [setSelectedConversation]);
 
   return (
-    <div className='md:min-w-[450px] flex flex-col'>
+    <div className='flex flex-col h-full'>
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
@@ -29,7 +29,11 @@ const MessageContainer = () => {
             <span className='ml-auto text-sm text-rose-500'>Online</span>
           </div>
 
-          <Messages />
+          {/* Messages List */}
+          <div className='flex-1 overflow-y-auto'>
+            <Messages />
+          </div>
+
           <MessageInput />
         </>
       )}
@@ -42,13 +46,13 @@ const NoChatSelected = () => {
 
   return (
     <div className='flex items-center justify-center w-full h-full'>
-      <div className='px-4 text-center sm:text-lg md:text-xl text-gray-200 font-semibold flex flex-col items-center gap-2'>
+      <div className='px-4 text-center text-base sm:text-lg text-gray-200 font-semibold flex flex-col items-center gap-2'>
         <p>Welcome 👋 {user.fullName} ❄</p>
         <p>Select a chat to start messaging</p>
-        <TiMessages className='text-3xl md:text-6xl text-center' />
+        <TiMessages className='text-3xl md:text-6xl' />
       </div>
     </div>
   );
 };
 
-export default MessageContainer;
+export default MobileMessageContainer;
