@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useUserStore } from "../src/store/userStore";
+import { useUserStore } from "../store/userStore";
 
 const useFetchUsers = () => {
   const { getUsers } = useUserStore();

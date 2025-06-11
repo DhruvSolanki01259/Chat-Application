@@ -2,14 +2,12 @@ import { useEffect, useRef } from "react";
 import { useConversationStore } from "../../store/conversationStore";
 import Message from "./Message";
 import MessageSkeleton from "../skeleton/MessageSkeleton";
+import useListenMessages from "../../hooks/listenMessages";
 
 const Messages = () => {
   const { messages, getMessages, receiverId, loadingMessages } =
     useConversationStore();
-
-  useEffect(() => {
-    if (receiverId) getMessages(receiverId);
-  }, [receiverId, getMessages]);
+  useListenMessages();
 
   // console.log(receiverId);
   // console.log(messages);

@@ -1,14 +1,17 @@
 import { useEffect } from "react";
 import { useAuthStore } from "../../store/authStore";
-import { useConversationStore } from "../../store/conversationStore";
-import Messages from "./Messages";
+import Messages from "../messages/Messages";
 
 import { TiMessages } from "react-icons/ti";
-import MessageInput from "./MessageInput";
+import MessageInput from "../messages/MessageInput";
+import { useSocketContext } from "../../context/SocketContext";
+import { useConversationStore } from "../../store/conversationStore";
 
 const MobileMessageContainer = () => {
   const { selectedConversation, setSelectedConversation } =
     useConversationStore();
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(String(selectedConversation?._id));
 
   useEffect(() => {
     return () => setSelectedConversation(null);
@@ -26,7 +29,9 @@ const MobileMessageContainer = () => {
             <span className='text-white font-semibold'>
               {selectedConversation.fullName}
             </span>
-            <span className='ml-auto text-sm text-rose-500'>Online</span>
+            <span className='ml-auto text-sm text-rose-500'>
+              {isOnline ? "Online" : "Offline"}
+            </span>
           </div>
 
           {/* Messages List */}

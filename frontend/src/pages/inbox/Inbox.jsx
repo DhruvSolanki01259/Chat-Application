@@ -1,9 +1,9 @@
 import MessageContainer from "../../components/messages/MessageContainer";
 import Sidebar from "../../components/sidebar/Sidebar";
-import useMobileScreenSize from "../../hooks/mobileScreenSize";
 import MobileSearchBar from "../../components/mobile/MobileSearchBar";
 import MobileFooter from "../../components/mobile/MobileFooter";
 import MobileSidebarAndMessageContainer from "../../components/mobile/MobileSidebarAndMessageContainer";
+import useMobileScreenSize from "../../hooks/mobileScreenSize";
 
 const Inbox = () => {
   const { width } = useMobileScreenSize();

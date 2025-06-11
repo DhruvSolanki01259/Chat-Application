@@ -1,5 +1,5 @@
 import MobileConversations from "./MobileConversations";
-import MobileMessageContainer from "../messages/MobileMessageContainer";
+import MobileMessageContainer from "./MobileMessageContainer";
 
 const MobileSidebarAndMessageContainer = () => {
   return (

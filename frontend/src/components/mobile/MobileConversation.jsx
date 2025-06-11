@@ -1,8 +1,11 @@
+import { useSocketContext } from "../../context/SocketContext";
 import { useConversationStore } from "../../store/conversationStore";
 
 const MobileConversation = ({ conversation }) => {
   const { setReceiverId, selectedConversation, setSelectedConversation } =
     useConversationStore();
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(String(conversation?._id));
 
   const isSelected = selectedConversation?._id === conversation._id;
 
@@ -18,7 +21,7 @@ const MobileConversation = ({ conversation }) => {
           setReceiverId(conversation._id);
         }}>
         {/* Avatar */}
-        <div className='avatar online'>
+        <div className={`avatar ${isOnline ? "avatar-online" : ""}`}>
           <div className='w-12 rounded-full'>
             <img
               src={conversation.profilePic}

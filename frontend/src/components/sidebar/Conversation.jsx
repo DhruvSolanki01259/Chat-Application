@@ -1,3 +1,4 @@
+import { useSocketContext } from "../../context/SocketContext";
 import { useConversationStore } from "../../store/conversationStore";
 
 const Conversation = ({ conversation, emoji, lastIdx }) => {
@@ -5,6 +6,9 @@ const Conversation = ({ conversation, emoji, lastIdx }) => {
     useConversationStore();
 
   const isSelected = selectedConversation?._id === conversation._id;
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(String(conversation._id));
+  // console.log(`Status is `, isOnline);
 
   return (
     <>
@@ -18,7 +22,7 @@ const Conversation = ({ conversation, emoji, lastIdx }) => {
           setReceiverId(conversation._id);
         }}>
         {/* Avatar */}
-        <div className='avatar online'>
+        <div className={`avatar ${isOnline ? "avatar-online" : ""}`}>
           <div className='w-12 rounded-full'>
             <img
               src={conversation.profilePic}
