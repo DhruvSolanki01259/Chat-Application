@@ -25,14 +25,18 @@ const MobileConversations = () => {
       )}
       {!loading && users.length > 0 && (
         <div className='py-2 flex flex-col overflow-y-auto'>
-          {users.map((user, idx) => (
-            <MobileConversation
-              key={user._id}
-              conversation={user}
-              emoji={getRandomEmoji()}
-              lastIdx={idx === users.length - 1}
-            />
-          ))}
+          {Array.isArray(users) && users.length > 0 && (
+            <div className='py-2 flex flex-col overflow-y-auto'>
+              {users.map((user, idx) => (
+                <MobileConversation
+                  key={user._id}
+                  conversation={user}
+                  emoji={getRandomEmoji()}
+                  lastIdx={idx === users.length - 1}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
 

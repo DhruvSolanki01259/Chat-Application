@@ -15,10 +15,13 @@ export const useAuthStore = create(
       signup: async (fullName, email, password, confirmPassword, gender) => {
         set({ user: null, loading: true, error: null, isAuthenticated: false });
         try {
-          const response = await axios.post(
-            `http://localhost:5000/api/auth/signup`,
-            { fullName, email, password, confirmPassword, gender }
-          );
+          const response = await axios.post(`/api/auth/signup`, {
+            fullName,
+            email,
+            password,
+            confirmPassword,
+            gender,
+          });
           set({
             user: response.data.rest,
             loading: false,
@@ -37,10 +40,10 @@ export const useAuthStore = create(
       login: async (email, password) => {
         set({ user: null, loading: true, error: null, isAuthenticated: false });
         try {
-          const response = await axios.post(
-            `http://localhost:5000/api/auth/login`,
-            { email, password }
-          );
+          const response = await axios.post(`/api/auth/login`, {
+            email,
+            password,
+          });
           set({
             user: response.data.rest,
             loading: false,
@@ -59,9 +62,7 @@ export const useAuthStore = create(
       logout: async () => {
         set({ loading: true, error: null });
         try {
-          const response = await axios.post(
-            "http://localhost:5000/api/auth/logout"
-          );
+          const response = await axios.post("/api/auth/logout");
           set({
             user: null,
             loading: false,

@@ -19,6 +19,11 @@ const Login = () => {
       return;
     }
 
+    if (!email.endsWith("@gmail.com")) {
+      toast.error("Only @gmail.com emails are allowed.");
+      return;
+    }
+
     try {
       await login(email, password);
       if (useAuthStore.getState().isAuthenticated) {

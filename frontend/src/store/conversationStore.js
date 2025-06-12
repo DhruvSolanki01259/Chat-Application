@@ -23,10 +23,7 @@ export const useConversationStore = create((set) => ({
   sendMessages: async (id, message) => {
     set({ sendingMessage: true, error: null });
     try {
-      const response = await axios.post(
-        `http://localhost:5000/api/message/send/${id}`,
-        { message }
-      );
+      const response = await axios.post(`/api/message/send/${id}`, { message });
 
       set((state) => ({
         messages: [...state.messages, response.data],
@@ -44,9 +41,7 @@ export const useConversationStore = create((set) => ({
   getMessages: async (id) => {
     set({ loadingMessages: true, error: null });
     try {
-      const response = await axios.get(
-        `http://localhost:5000/api/message/${id}`
-      );
+      const response = await axios.get(`/api/message/${id}`);
       set({
         messages: response.data,
         loadingMessages: false,

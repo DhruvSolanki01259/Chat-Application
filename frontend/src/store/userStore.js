@@ -11,9 +11,9 @@ export const useUserStore = create((set) => ({
   getUsers: async () => {
     set({ loading: true, error: null });
     try {
-      const response = await axios.get("http://localhost:5000/api/user");
-      // console.log("Fetched users:", response.data);
-      set({ users: response.data, loading: false });
+      const response = await axios.get("/api/user");
+      const data = Array.isArray(response.data) ? response.data : [];
+      set({ users: data, loading: false });
     } catch (error) {
       console.error("Error fetching users:", error);
       set({

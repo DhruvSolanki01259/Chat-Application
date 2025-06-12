@@ -26,14 +26,18 @@ const Conversations = () => {
         </div>
       )}
       <div className='py-2 flex flex-col overflow-auto'>
-        {users.map((user, idx) => (
-          <Conversation
-            key={user._id}
-            conversation={user}
-            emoji={getRandomEmoji()}
-            lastIdx={idx === users.length - 1}
-          />
-        ))}
+        {Array.isArray(users) && users.length > 0 && (
+          <div className='py-2 flex flex-col overflow-y-auto'>
+            {users.map((user, idx) => (
+              <Conversation
+                key={user._id}
+                conversation={user}
+                emoji={getRandomEmoji()}
+                lastIdx={idx === users.length - 1}
+              />
+            ))}
+          </div>
+        )}
       </div>
       {error && <p className='text-red-500'>Error: {error}</p>}
     </div>
